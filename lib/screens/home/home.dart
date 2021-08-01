@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pretty_toughh/models/details.dart';
+import 'package:pretty_toughh/models/opportunities.dart';
 import 'package:pretty_toughh/screens/home/infoList.dart';
+import 'package:pretty_toughh/screens/home/opportunitiesList.dart';
 import 'package:pretty_toughh/services/auth.dart';
 import 'package:pretty_toughh/services/database.dart';
 import 'package:provider/provider.dart';
@@ -25,8 +27,8 @@ class Home extends StatelessWidget {
       });
     }
 
-    return StreamProvider<List<details>?>.value(
-      value: DatabaseService().personalInfo,
+    return StreamProvider<List<Opportunities>?>.value(
+      value: DatabaseService().allOpportunities,
       initialData: null,
       child: Scaffold(
         drawer: Drawer(
@@ -74,127 +76,128 @@ class Home extends StatelessWidget {
             ), label: Text(''))
           ],
         ),
-        body: Container(
-          margin: EdgeInsets.fromLTRB(8.0,   8.0, 8.0, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Card(
-                elevation: 0.5,
-                color: Colors.yellow[200],
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'GSB Hackathon',
-                        style: TextStyle(
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black
-                        ),
-                      ),
-                      Text(
-                        'Happening this Summer! All girls global online hackathons',
-                        style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Card(
-                elevation: 0.5,
-                color: Colors.pink[200],
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'GSB Hackathon',
-                        style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black
-                        ),
-                      ),
-                      Text(
-                        'Happening this Summer! All girls global online hackathons',
-                        style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Card(
-                elevation: 0.5,
-                color: Colors.yellow[200],
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'GSB Hackathon',
-                        style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black
-                        ),
-                      ),
-                      Text(
-                        'Happening this Summer! All girls global online hackathons',
-                        style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Card(
-                elevation: 0.5,
-                color: Colors.pink[200],
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'GSB Hackathon',
-                        style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black
-                        ),
-                      ),
-                      Text(
-                        'Happening this Summer! All girls global online hackathons',
-                        style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-
-            ],
-          ),
-        ),
+        body: OpportunitiesList(),
+    // Container(
+        //   margin: EdgeInsets.fromLTRB(8.0,   8.0, 8.0, 0),
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.stretch,
+        //     children: [
+        //       Card(
+        //         elevation: 0.5,
+        //         color: Colors.yellow[200],
+        //         child: Padding(
+        //           padding: const EdgeInsets.all(12.0),
+        //           child: Column(
+        //             crossAxisAlignment: CrossAxisAlignment.start,
+        //             children: [
+        //               Text(
+        //                 'GSB Hackathon',
+        //                 style: TextStyle(
+        //                   fontSize: 24.0,
+        //                   fontWeight: FontWeight.bold,
+        //                   color: Colors.black
+        //                 ),
+        //               ),
+        //               Text(
+        //                 'Happening this Summer! All girls global online hackathons',
+        //                 style: TextStyle(
+        //                     fontSize: 18.0,
+        //                     fontWeight: FontWeight.normal,
+        //                     color: Colors.black
+        //                 ),
+        //               )
+        //             ],
+        //           ),
+        //         ),
+        //       ),
+        //       Card(
+        //         elevation: 0.5,
+        //         color: Colors.pink[200],
+        //         child: Padding(
+        //           padding: const EdgeInsets.all(12.0),
+        //           child: Column(
+        //             crossAxisAlignment: CrossAxisAlignment.start,
+        //             children: [
+        //               Text(
+        //                 'GSB Hackathon',
+        //                 style: TextStyle(
+        //                     fontSize: 24.0,
+        //                     fontWeight: FontWeight.bold,
+        //                     color: Colors.black
+        //                 ),
+        //               ),
+        //               Text(
+        //                 'Happening this Summer! All girls global online hackathons',
+        //                 style: TextStyle(
+        //                     fontSize: 18.0,
+        //                     fontWeight: FontWeight.normal,
+        //                     color: Colors.black
+        //                 ),
+        //               )
+        //             ],
+        //           ),
+        //         ),
+        //       ),
+        //       Card(
+        //         elevation: 0.5,
+        //         color: Colors.yellow[200],
+        //         child: Padding(
+        //           padding: const EdgeInsets.all(12.0),
+        //           child: Column(
+        //             crossAxisAlignment: CrossAxisAlignment.start,
+        //             children: [
+        //               Text(
+        //                 'GSB Hackathon',
+        //                 style: TextStyle(
+        //                     fontSize: 24.0,
+        //                     fontWeight: FontWeight.bold,
+        //                     color: Colors.black
+        //                 ),
+        //               ),
+        //               Text(
+        //                 'Happening this Summer! All girls global online hackathons',
+        //                 style: TextStyle(
+        //                     fontSize: 18.0,
+        //                     fontWeight: FontWeight.normal,
+        //                     color: Colors.black
+        //                 ),
+        //               )
+        //             ],
+        //           ),
+        //         ),
+        //       ),
+        //       Card(
+        //         elevation: 0.5,
+        //         color: Colors.pink[200],
+        //         child: Padding(
+        //           padding: const EdgeInsets.all(12.0),
+        //           child: Column(
+        //             crossAxisAlignment: CrossAxisAlignment.start,
+        //             children: [
+        //               Text(
+        //                 'GSB Hackathon',
+        //                 style: TextStyle(
+        //                     fontSize: 24.0,
+        //                     fontWeight: FontWeight.bold,
+        //                     color: Colors.black
+        //                 ),
+        //               ),
+        //               Text(
+        //                 'Happening this Summer! All girls global online hackathons',
+        //                 style: TextStyle(
+        //                     fontSize: 18.0,
+        //                     fontWeight: FontWeight.normal,
+        //                     color: Colors.black
+        //                 ),
+        //               )
+        //             ],
+        //           ),
+        //         ),
+        //       ),
+        //
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }
