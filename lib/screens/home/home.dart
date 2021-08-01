@@ -5,6 +5,7 @@ import 'package:pretty_toughh/screens/home/blogs.dart';
 import 'package:pretty_toughh/screens/home/infoList.dart';
 import 'package:pretty_toughh/screens/home/mentor.dart';
 import 'package:pretty_toughh/screens/home/opportunitiesList.dart';
+import 'package:pretty_toughh/screens/home/profiliForm.dart';
 import 'package:pretty_toughh/screens/home/water.dart';
 import 'package:pretty_toughh/services/auth.dart';
 import 'package:pretty_toughh/services/database.dart';
@@ -26,6 +27,7 @@ class Home extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
           ),
+          child: ProfileSheet(),
         );
       });
     }

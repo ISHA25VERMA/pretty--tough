@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pretty_toughh/models/details.dart';
 import 'package:pretty_toughh/models/details.dart';
 import 'package:pretty_toughh/models/opportunities.dart';
+import 'package:pretty_toughh/models/user.dart';
 
 
 class DatabaseService {
@@ -55,5 +56,15 @@ class DatabaseService {
   Stream<List<Opportunities>> get allOpportunities {
     return opportunities.snapshots()
       .map(_listOfOpportunities);
+  }
+  //database return
+  Stream<UserData> get userData{
+    return information.document(uid).snapshots()
+        .map(_userDataFromSnapshot);
+  }
+
+  //user data from snapshot
+  UserData _userDataFromSnapshot (DocumentSnapshot snapshot){
+    return UserData(age: snapshot.data['age'], contact: snapshot.data['contact'], description: snapshot.data['description'], uid: uid) ;
   }
 }
