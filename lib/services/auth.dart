@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pretty_toughh/models/user.dart';
 import 'package:pretty_toughh/models/user.dart';
+import 'package:pretty_toughh/services/database.dart';
 
 class AuthService{
 
@@ -35,6 +36,8 @@ class AuthService{
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      
+
       return _userFromFirebaseAuth(user);
     }catch(e){
       print(e.toString());
@@ -48,6 +51,9 @@ class AuthService{
     try{
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+
+      //database
+      await DatabaseService(uid: user.uid).updateUser('0', 'hey, new women', '0');
       return _userFromFirebaseAuth(user);
     }catch(e){
       print(e.toString());
