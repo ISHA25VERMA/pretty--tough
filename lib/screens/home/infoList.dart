@@ -14,25 +14,8 @@ class _infoListState extends State<infoList> {
   @override
   Widget build(BuildContext context) {
 
-    final info = Provider.of<List<details>?>(context);
+    final info = Provider.of<List<details>?>(context)??[];
 
-    if (info!= null){
-      info.forEach((element) {
-        print(element.description);
-        print(element.contact);
-        print(element.age);
-      });
-    }
-
-    
-    // if (info != null){
-    //   for (var doc in info.documents){
-    //     print(doc.data);
-    //   }
-    // }
-    // for (var doc in info!.docs) {
-    //   print(doc.data);
-    // }
 
     return Container();
   }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pretty_toughh/screens/home/blogs.dart';
 import 'package:pretty_toughh/screens/home/home.dart';
+import 'package:pretty_toughh/screens/home/mentor.dart';
 import 'package:pretty_toughh/screens/wrapper.dart';
 import 'package:pretty_toughh/services/auth.dart';
+import 'package:pretty_toughh/shared/loading.dart';
 import 'package:provider/provider.dart';
 
 import 'models/user.dart';
@@ -18,7 +21,13 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       initialData: User(uid: 'null'),
       child: MaterialApp(
-        home: Wrapper(),
+        initialRoute: '/',
+        routes: {
+          '/':(context)=>Wrapper(),
+          'blogs': (context)=>Blogs(),
+          'mentor': (context)=>Mentors()
+        },
+
       ),
     );
   }
