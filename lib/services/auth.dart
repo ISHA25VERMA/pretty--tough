@@ -46,7 +46,7 @@ class AuthService{
     }
   }
 
-  //register with email & password
+  //register.png with email & password
   Future registerWithEmail(String email, String password) async {
     try{
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
@@ -57,7 +57,7 @@ class AuthService{
       return _userFromFirebaseAuth(user);
     }catch(e){
       print(e.toString());
-      print('failed to register');
+      print('failed to register.png');
       return null;
     }
   }

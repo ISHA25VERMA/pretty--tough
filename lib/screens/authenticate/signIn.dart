@@ -27,11 +27,15 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return loading? Loading() : Scaffold(
-      backgroundColor: Colors.brown[100],
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.pink[600],
         elevation: 0.0,
-        title: Text('Sign in '),
+        title: Text('Sign in ',
+          style: TextStyle(
+            fontSize: 14.0,
+            fontWeight: FontWeight.bold
+          ),
+        ),
         actions: [
           TextButton.icon(onPressed: (){
             widget.toggleView();
@@ -46,77 +50,92 @@ class _SignInState extends State<SignIn> {
           ))
         ],
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-        child: Form(
-            key: _formkey,
-            child: Column(
-                children: [
-                  SizedBox(height: 20.0,),
-                  TextFormField(
-                    validator: (val){
-                      if (val!.isNotEmpty){
-                        return null;
-                      }else{
-                        return 'enter email';
-                      }
-                    },
-                    onChanged: (val){
-                      setState(() {
-                        email = val;
-                      });
-                    },),
-                  SizedBox(height: 20.0,),
-                  TextFormField(
-                    onChanged: (val){
-                      setState(() {
-                        password = val;
-                      });
-                    },
-                    validator: (val)=>val!.isEmpty ? 'Enter password': null,
-                    obscureText: true,
-                  ),
-                  SizedBox(height: 20.0,),
-                  ElevatedButton(onPressed: () async {
-                    if(_formkey.currentState!.validate()){
-                      setState(() => loading = true);
-                      dynamic result = _auth.signInWithEmail(email, password);
-                      if (result == null){
-                        setState((){
-                          error = 'Invalid credentials';
-                          loading = false;
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+          child: Form(
+              key: _formkey,
+              child: Column(
+                  children: [
+                    Center(
+                      child: Image.asset('assets/signIn.png')
+                    ),
+                    SizedBox(height: 20.0,),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          hintText: 'email'
+                      ),
+                      validator: (val){
+                        if (val!.isNotEmpty){
+                          return null;
+                        }else{
+                          return 'enter email';
+                        }
+                      },
+                      onChanged: (val){
+                        setState(() {
+                          email = val;
                         });
+                      },),
+                    SizedBox(height: 20.0,),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'password'
+                      ),
+                      onChanged: (val){
+                        setState(() {
+                          password = val;
+                        });
+                      },
+                      validator: (val)=>val!.isEmpty ? 'Enter password': null,
+                      obscureText: true,
+                    ),
+                    SizedBox(height: 20.0,),
+                    ElevatedButton(onPressed: () async {
+                      if(_formkey.currentState!.validate()){
+                        setState(() => loading = true);
+                        dynamic result = _auth.signInWithEmail(email, password);
+                        if (result == null){
+                          setState((){
+                            error = 'Invalid credentials';
+                            loading = false;
+                          });
 
+                        }
                       }
-                    }
-                  }, child: Text(
-                    'sign in',),
-                  ),
-                  SizedBox(height: 12.0,),
-                  Text(
-                    error,
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 14.0,
-                    ),)
-                ]
-            )
+                    }, child: Text(
+                      'sign in',),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.pink,
+                        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                      ),
+                    ),
+                    SizedBox(height: 12.0,),
+                    Text(
+                      error,
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 14.0,
+                      ),)
+                  ]
+              )
+          ),
+          // ElevatedButton(
+          //   onPressed: () async {
+          //     dynamic results = await _auth.signInAnon();
+          //     if(results == null){
+          //       print('error sign in');
+          //     }else{
+          //       print('signed in'
+          //       );
+          //       print(results.uid);
+          //     }
+          //   },
+          //   child: Text(
+          //     'Sign in'
+          //   ),
+          // ),
         ),
-        // ElevatedButton(
-        //   onPressed: () async {
-        //     dynamic results = await _auth.signInAnon();
-        //     if(results == null){
-        //       print('error sign in');
-        //     }else{
-        //       print('signed in'
-        //       );
-        //       print(results.uid);
-        //     }
-        //   },
-        //   child: Text(
-        //     'Sign in'
-        //   ),
-        // ),
       ),
     );
   }

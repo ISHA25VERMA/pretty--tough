@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pretty_toughh/models/details.dart';
+import 'package:pretty_toughh/models/details.dart';
+import 'package:pretty_toughh/models/details.dart';
 
 
 class DatabaseService{
@@ -17,8 +20,21 @@ class DatabaseService{
     });
   }
 
+  //get info list
+
+  List<details> _listOfInfoFromUser(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+      return details(
+          contact:doc.data["name"],
+        age: doc.data['age'],
+        description: doc.data['description']
+      );
+    }).toList();
+  }
+
   //get steams  //notifies whenever information is changed
-  Stream<QuerySnapshot> get personalInfo {
-    return information.snapshots();
+  Stream<List<details>> get personalInfo {
+    return information.snapshots()
+    .map(_listOfInfoFromUser);
   }
 }
